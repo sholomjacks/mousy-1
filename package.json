@@ -14,6 +14,11 @@
     "tutorial",
     "demo"
   ],
+  "nodemonConfig": {
+    "watch": ["main.css", "main.js"],
+    "ext": "js,css,html",
+    "exec": "npm start"
+  },
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {

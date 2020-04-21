@@ -1,17 +1,29 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, screen, globalShortcut} = require('electron')
 const path = require('path')
 
 function createWindow () {
+  globalShortcut.register('F9', () => {
+    console.log('pressed')
+  })
+
+  const window_size = screen.getPrimaryDisplay().workAreaSize
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: window_size.width,
+    height: window_size.height,
+    transparent: true,
+    frame: false,
+    alwaysOnTop: true,
+    fullscreen: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
   })
 
+  mainWindow.setIgnoreMouseEvents(true)
+  mainWindow.setSkipTaskbar(true)
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
