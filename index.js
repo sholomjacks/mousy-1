@@ -14,3 +14,8 @@ const drag = evt => {
 ipcRenderer.on('toggle', (e, arg) => {
     toggle()
 })
+ipcRenderer.on('pos', (e, arg) => {
+    console.log(arg.x,arg.y);
+    
+    drag(arg)
+})

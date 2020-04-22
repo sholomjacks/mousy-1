@@ -9,12 +9,12 @@ function createWindow() {
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: window_size.width / 2,
-    height: window_size.height / 2,
+    width: window_size.width,
+    height: window_size.height,
     transparent: true,
     frame: false,
     alwaysOnTop: true,
-    fullscreen: false,
+    fullscreen: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
@@ -24,23 +24,24 @@ function createWindow() {
   mainWindow.setSkipTaskbar(true)
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
-  var open = 0
+
+  var prev_pos = {x:0,y:0}
+  setInterval(() => {
+    const pos = screen.getCursorScreenPoint()
+    if (pos.x !== prev_pos.x || pos.y !== prev_pos.y) {
+      console.log(pos)
+      mainWindow.webContents.send('pos', pos)
+      prev_pos = pos
+    }
+  }, 0)
+
   globalShortcut.register('F9', () => {
     mainWindow.webContents.send('toggle')
-    
-    open = 1 - open
-    // if (open) {
-    //   mainWindow.webContents.openDevTools()
-    //   mainWindow.setIgnoreMouseEvents(false)
-    //   mainWindow.setAlwaysOnTop(false)
-      
-      
-    // } else {
-    //   mainWindow.webContents.closeDevTools()
-    //   mainWindow.setIgnoreMouseEvents(true)
-    //   mainWindow.setAlwaysOnTop(true)
 
-    // }
+  })
+  globalShortcut.register('F11', () => {
+    mainWindow.setIgnoreMouseEvents(false)
+    mainWindow.webContents.openDevTools()
 
   })
   // Open the DevTools.
