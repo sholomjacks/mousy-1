@@ -1,34 +1,49 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, screen, globalShortcut} = require('electron')
+const { app, BrowserWindow, screen, globalShortcut } = require('electron')
 const path = require('path')
 
-function createWindow () {
-  globalShortcut.register('F9', () => {
-    console.log('pressed')
-  })
+function createWindow() {
+
 
   const window_size = screen.getPrimaryDisplay().workAreaSize
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: window_size.width,
-    height: window_size.height,
+    width: window_size.width / 2,
+    height: window_size.height / 2,
     transparent: true,
     frame: false,
     alwaysOnTop: true,
     fullscreen: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true
     }
   })
-
   mainWindow.setIgnoreMouseEvents(true)
   mainWindow.setSkipTaskbar(true)
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
+  var open = 0
+  globalShortcut.register('F9', () => {
+    mainWindow.webContents.send('toggle')
+    
+    open = 1 - open
+    // if (open) {
+    //   mainWindow.webContents.openDevTools()
+    //   mainWindow.setIgnoreMouseEvents(false)
+    //   mainWindow.setAlwaysOnTop(false)
+      
+      
+    // } else {
+    //   mainWindow.webContents.closeDevTools()
+    //   mainWindow.setIgnoreMouseEvents(true)
+    //   mainWindow.setAlwaysOnTop(true)
 
+    // }
+
+  })
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished

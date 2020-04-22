@@ -4,7 +4,9 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "q": "taskkill /f /im node.exe",
+    "qm": "sudo killall -9 node"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -15,7 +17,7 @@
     "demo"
   ],
   "nodemonConfig": {
-    "watch": ["main.css", "main.js"],
+    "watch": ["./"],
     "ext": "js,css,html",
     "exec": "npm start"
   },

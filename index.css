@@ -1,0 +1,32 @@
+body {
+    align-items: center;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    /* background-color: url("bg.jpg"); */
+    /* background-size: cover; */
+}
+
+@keyframes easeoutcircular {
+    from {
+        r: 142vw
+    }
+
+    to {
+        r: 160;
+    }
+}
+
+
+#bubble.on {
+    animation-name: easeoutcircular;
+    animation-duration: 0.8s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    transition-timing-function: - cubic-bezier(0.075, 0.82, 0.165, 1);
+    /* animation-delay: 0.5s; */
+    animation-fill-mode: forwards;
+}
