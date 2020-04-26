@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "q": "taskkill /f /im node.exe",
-    "qm": "sudo killall -9 node"
+    "qm": "sudo killall -9 node",
+    "build-w": "electron-packager ./ mousy --platform=win32 --arch=x64"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -17,13 +18,16 @@
     "demo"
   ],
   "nodemonConfig": {
-    "watch": ["./"],
+    "watch": [
+      "./"
+    ],
     "ext": "js,css,html",
     "exec": "npm start"
   },
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^8.2.3"
+    "electron": "^8.2.3",
+    "electron-packager": "^14.2.1"
   }
 }

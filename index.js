@@ -5,7 +5,21 @@ const draggable = evt => {
     svg.addEventListener('mousedown', toggle);
     // svg.addEventListener('mouseup', stop);
 }
-const toggle = (evt) => { document.getElementById('bubble').classList.toggle('on') }
+var open = 0
+const toggle = (evt) => {
+    if (open) {
+        document.getElementById('bubble').classList.remove('on')
+        document.getElementById('bubble').classList.add('off')
+        document.getElementById('bubble').setAttribute('r', '160')
+    
+    } else {
+        
+        document.getElementById('bubble').classList.add('on')
+        document.getElementById('bubble').classList.remove('off')
+        document.getElementById('bubble').setAttribute('r', '142vh')
+    }
+    open = 1 - open
+}
 const drag = evt => {
     const bubble = document.getElementById('bubble')
     bubble.setAttributeNS(null, 'cx', evt.x)
@@ -15,7 +29,6 @@ ipcRenderer.on('toggle', (e, arg) => {
     toggle()
 })
 ipcRenderer.on('pos', (e, arg) => {
-    console.log(arg.x,arg.y);
-    
+    // console.log(arg.x,arg.y);
     drag(arg)
 })

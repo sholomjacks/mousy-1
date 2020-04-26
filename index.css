@@ -11,12 +11,17 @@ body {
 }
 
 @keyframes easeoutcircular {
-    from {
+    /* from {
         r: 142vw
-    }
+    } */
 
     to {
         r: 160;
+    }
+}
+@keyframes easeoutcircular_off {
+to {
+        r: 142vw;
     }
 }
 
@@ -27,6 +32,15 @@ body {
     animation-iteration-count: 1;
     animation-direction: normal;
     transition-timing-function: - cubic-bezier(0.075, 0.82, 0.165, 1);
-    /* animation-delay: 0.5s; */
     animation-fill-mode: forwards;
 }
+
+#bubble.off {
+    animation-name: easeoutcircular_off;
+    animation-duration: 0.8s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    transition-timing-function: - cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation-fill-mode: forwards;
+}
+

@@ -29,7 +29,7 @@ function createWindow() {
   setInterval(() => {
     const pos = screen.getCursorScreenPoint()
     if (pos.x !== prev_pos.x || pos.y !== prev_pos.y) {
-      console.log(pos)
+      // console.log(pos)
       mainWindow.webContents.send('pos', pos)
       prev_pos = pos
     }
