@@ -1,9 +1,29 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, screen, globalShortcut } = require('electron')
+const { app, Menu, BrowserWindow, screen, globalShortcut, Tray } = require('electron')
 const path = require('path')
+const iconPath = path.join(__dirname, "icon.png")
+let tray = null
 
 function createWindow() {
 
+  tray = new Tray(iconPath)
+
+  function handleClick() {
+    app.quit()
+  }
+
+  const template = [
+    {
+      label: "Exit",
+      click: handleClick
+    }
+  ]
+  
+  const ctxMenu = Menu.buildFromTemplate(template)
+
+  tray.setContextMenu(ctxMenu)
+
+  tray.setToolTip("Mousy")
 
   const window_size = screen.getPrimaryDisplay().workAreaSize
 
